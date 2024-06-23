@@ -1,0 +1,87 @@
+.Search {
+  padding: 1rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 100%;
+  grid-row: 1/2;
+}
+
+.Search > * {
+  padding: 1.5rem;
+}
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+.searchbox-container {
+  max-width: 400px;
+  flex: 1;
+  display: flex;
+  position: relative;
+}
+
+.searchbox {
+  max-width: 400px;
+  flex: 1;
+  padding: 0.5rem;
+  background-color: var(--secondary-background);
+  border: none;
+  border-radius: 0.25rem;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+}
+
+.songs-container {
+  padding-block: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.clear-search {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  min-width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .Search > * {
+    padding: 0;
+  }
+
+  .searchbox-container {
+    max-width: unset;
+    width: 100%;
+  }
+
+  .searchbox {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .search-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  .songs-container {
+    padding-block: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

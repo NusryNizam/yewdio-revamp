@@ -1,0 +1,75 @@
+.Sidebar {
+  /* border: 1px solid red; */
+  background-color: var(--secondary-background);
+  grid-row: 1/-1;
+  border-top: none;
+  padding-top: 0;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  margin-block: auto;
+  /* border: 1px solid green; */
+  height: 100%;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.nav-button-desktop {
+  min-height: 4rem;
+}
+
+.nav-link {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-height: 4rem;
+  gap: 1rem;
+  padding-left: 30%;
+}
+
+a.active {
+  color: var(--accent);
+}
+
+a.active * {
+  color: var(--accent);
+  stroke: var(--accent);
+}
+
+.nav-link-text {
+  text-decoration: none !important;
+  font-size: 1rem;
+  color: white;
+}
+
+@media (max-width: 760px) {
+  .Sidebar {
+    order: 1;
+    grid-row: 3/-1;
+    border-top: 1px dotted var(--border-light);
+    padding-top: 0.25rem;
+  }
+
+  .button-container {
+    height: 100%;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    gap: 0.25rem;
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .nav-link-text {
+    text-decoration: none;
+    font-size: 0.625rem;
+  }
+}

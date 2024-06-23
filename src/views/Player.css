@@ -1,0 +1,49 @@
+.Player {
+  background-color: var(--secondary-background);
+  order: 1;
+  grid-column: 2/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  position: relative;
+}
+
+.main-control-button {
+  min-width: 3rem;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  background-color: var(--secondary-background);
+  border: 1px solid var(--border-light);
+}
+
+.seeker {
+  height: 3px;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  background-color: var(--accent);
+  transition: all 1000ms ease-in-out;
+}
+
+.loader {
+  animation: rotate 1000ms ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    rotate: 360deg;
+  }
+}
+@media (max-width: 760px) {
+  .Player {
+    order: 0;
+    grid-column: 1/-1;
+    grid-row: 2 / span 1;
+  }
+}
