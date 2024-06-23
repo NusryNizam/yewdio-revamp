@@ -44,7 +44,7 @@ const Search = () => {
         <h2 className="title">Search</h2>
         <div className="searchbox-container">
           <input
-            type="text"
+            type="search"
             placeholder="Search for songs"
             className="searchbox"
             onChange={(e) => {
