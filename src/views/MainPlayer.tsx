@@ -1,5 +1,6 @@
 import {
   HeartIcon,
+  LoaderCircle,
   PauseIcon,
   PlayIcon,
   RedoIcon,
@@ -24,7 +25,7 @@ import { Song } from "../services/searchBySong.types";
 
 const MainPlayer = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
-  const { playing, togglePlayPause, seek, getPosition, duration } =
+  const { playing, togglePlayPause, seek, getPosition, isLoading, duration } =
     useGlobalAudioPlayer();
   const dispatch = useAppDispatch();
   const [completedPercentage, setCompletedPercentage] = useState(0);
@@ -96,7 +97,15 @@ const MainPlayer = () => {
 
           <div className="player-controls">
             <IconButton Icon={SkipBackIcon} />
-            {playing ? (
+            {isLoading ? (
+              <IconButton
+                Icon={LoaderCircle}
+                backgroundColor="#2e2e2e"
+                onPress={togglePlayPause}
+                disabled={true}
+                className="loader"
+              />
+            ) : playing ? (
               <IconButton
                 Icon={PauseIcon}
                 backgroundColor="#2e2e2e"

@@ -5,7 +5,6 @@ import {
   playFavourites,
   playNext,
   selectFavourites,
-  selectNowPlaying,
 } from "../features/playlists/playlistSlice";
 import { openSheet, setSheetData } from "../features/settings/settingSlice";
 import { usePlayer } from "../hooks/usePlayer";
@@ -13,15 +12,15 @@ import { Song } from "../services/searchBySong.types";
 import "./Favourites.css";
 
 const Favourites = () => {
-  const nowPlaying = useAppSelector(selectNowPlaying);
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
-  const { playAudio } = usePlayer({
-    onend() {
+  const { playAudio, playLoaded } = usePlayer({
+    onend: () => {
       dispatch(playNext());
-      if (nowPlaying) playAudio(nowPlaying);
+      setTimeout(() => {
+        playLoaded();
+      }, 500);
     },
-    autoplay: true,
   });
 
   const handleMoreOptions = (data: Song) => {
@@ -31,10 +30,9 @@ const Favourites = () => {
 
   const handlePlayFavourites = () => {
     dispatch(playFavourites());
-
     setTimeout(() => {
-      if (nowPlaying) playAudio(nowPlaying);
-    }, 1000);
+      playLoaded();
+    }, 500);
   };
 
   return (
