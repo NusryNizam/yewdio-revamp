@@ -94,9 +94,9 @@ export const {
 // export const selectCount = (state: RootState) => state.counter.value;
 
 export const selectNowPlaying = (state: RootState) =>
-  state.playlists.nowPlaying;
+  state.persistedReducer.playlists.nowPlaying;
 
 export const selectFavourites = (state: RootState) =>
-  state.playlists.favourites;
+  state.persistedReducer.playlists.favourites;
 
 export default playlistSlice.reducer;

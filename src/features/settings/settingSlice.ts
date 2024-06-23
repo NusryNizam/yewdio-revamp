@@ -55,6 +55,7 @@ export const {
   minimizePlayer,
 } = settingSlice.actions;
 
-export const selectSettings = (state: RootState) => state.settings;
+export const selectSettings = (state: RootState) =>
+  state.persistedReducer.settings;
 
 export default settingSlice.reducer;

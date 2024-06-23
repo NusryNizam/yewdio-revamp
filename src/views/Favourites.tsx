@@ -17,7 +17,11 @@ const Favourites = () => {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer({
-    onend: handlePlayNext,
+    onend() {
+      dispatch(playNext());
+      if (nowPlaying) playAudio(nowPlaying);
+    },
+    autoplay: true,
   });
 
   const handleMoreOptions = (data: Song) => {
@@ -32,13 +36,6 @@ const Favourites = () => {
       if (nowPlaying) playAudio(nowPlaying);
     }, 1000);
   };
-
-  function handlePlayNext() {
-    dispatch(playNext());
-    setTimeout(() => {
-      if (nowPlaying) playAudio(nowPlaying);
-    }, 500);
-  }
 
   return (
     <div className="Favourites">
