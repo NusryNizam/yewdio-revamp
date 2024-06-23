@@ -55,10 +55,12 @@ function App() {
 
   const handleAddToFavourites = (data: Song) => {
     dispatch(addToFavourites(data));
+    handleCloseSheet();
   };
 
   const handleremoveFromFavourites = (data: Song) => {
     dispatch(removeFromFavourites(data));
+    handleCloseSheet();
   };
 
   return (

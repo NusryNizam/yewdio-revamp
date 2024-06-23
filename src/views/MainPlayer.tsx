@@ -19,14 +19,15 @@ import { getImageUrl } from "../utils/utils";
 import "./MainPlayer.css";
 import IconButton from "../components/IconButton";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Song } from "../services/searchBySong.types";
 
 const MainPlayer = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
-  const { playing, togglePlayPause, seek, getPosition } =
+  const { playing, togglePlayPause, seek, getPosition, duration } =
     useGlobalAudioPlayer();
   const dispatch = useAppDispatch();
+  const [completedPercentage, setCompletedPercentage] = useState(0);
 
   const favourites = useAppSelector(selectFavourites);
 
@@ -51,22 +52,48 @@ const MainPlayer = () => {
     seek(getPosition() - 10);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCompletedPercentage(Math.round((getPosition() / duration) * 100));
+    }, 1000);
+
+    if (!playing) {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval);
+  }, [duration, getPosition, playing]);
+
   return (
     <div className="MainPlayer">
       {nowPlaying ? (
         <>
+          <span
+            className="seeker-main"
+            style={{ width: `${completedPercentage}%` }}
+          ></span>
+
           <div className="album-art-container">
             <img
               src={getImageUrl(IMAGE_QUALITY.HIGH, nowPlaying.image)}
               alt="album-art"
             />
           </div>
+
+          <div className="album-art-container-blurred">
+            <img
+              src={getImageUrl(IMAGE_QUALITY.HIGH, nowPlaying.image)}
+              alt="album-art"
+            />
+          </div>
+
           <div className="details-container player-details">
             <h4 className="song-title overflow-prevent">{nowPlaying?.name}</h4>
             <p className="regular-text overflow-prevent">
               {nowPlaying?.artists?.primary.map((artist) => `${artist?.name} `)}
             </p>
           </div>
+
           <div className="player-controls">
             <IconButton Icon={SkipBackIcon} />
             {playing ? (

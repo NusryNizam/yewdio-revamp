@@ -7,6 +7,17 @@
   overflow: hidden;
   margin-bottom: 3rem;
   pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.album-art-container-blurred {
+  position: absolute;
+  inset: 0;
+  filter: blur(18px);
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .player-details {
@@ -28,4 +39,13 @@
 .main-play-button {
   cursor: pointer;
   background-color: var(--tertiary-background) !important;
+}
+
+.seeker-main {
+  height: 6px;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  background-color: var(--accent);
+  transition: all 1000ms ease-in-out;
 }
