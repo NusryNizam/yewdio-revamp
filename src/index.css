@@ -4,8 +4,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color-scheme: dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,9 +17,28 @@
   --border-light: #ffffff33;
   --accent: #ff8515;
   --text-light: #656565;
-  --text-dark: black;
+  --text-color: white;
+  --text-color-inverted: black;
 
   background-color: var(--main-background);
+  color: var(--text-white);
+}
+
+/* Light color scheme */
+@media (prefers-color-scheme: light) {
+  :root {
+    --main-background: #ededed;
+    --secondary-background: #f1f1f1;
+    --tertiary-background: #fff;
+    --border-light: #30303033;
+    --accent: #ff8515;
+    --text-light: #888888;
+    --text-color: #000000;
+    --text-color-inverted: black;
+
+    background-color: var(--main-background);
+    color: var(--text-color);
+  }
 }
 
 /*

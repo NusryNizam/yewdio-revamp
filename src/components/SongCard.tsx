@@ -4,6 +4,8 @@ import { getImageUrl } from "../utils/utils";
 import "./SongCard.css";
 import { Song } from "../services/searchBySong.types";
 import { MoreVertical } from "lucide-react";
+import { useAppSelector } from "../app/hooks";
+import { selectSettings } from "../features/settings/settingSlice";
 
 type SongCardProps = {
   data: Song;
@@ -21,10 +23,13 @@ const SongCard = ({
 }: SongCardProps) => {
   const isList = useMemo(() => (type === "LIST" ? true : false), [type]);
 
+  const { isLightTheme } = useAppSelector(selectSettings);
+
   return (
     <div
       className={`SongCardContainer`}
       style={onPress === undefined ? { cursor: "unset" } : {}}
+      role="button"
     >
       <div
         className={`SongCard ${type === "LIST" ? "list" : "tile"}`}
@@ -32,7 +37,6 @@ const SongCard = ({
         role="button"
         style={onPress === undefined ? { cursor: "unset" } : {}}
       >
-        {/* TODO: Get quality from settings */}
         <div className="image-container">
           <img
             src={getImageUrl(
@@ -50,7 +54,7 @@ const SongCard = ({
       </div>
       {isMoreOptions ? (
         <button onClick={onPressMore} className="more-button">
-          <MoreVertical size={24} color="white" />
+          <MoreVertical size={24} color={isLightTheme ? "black" : "white"} />
         </button>
       ) : null}
     </div>

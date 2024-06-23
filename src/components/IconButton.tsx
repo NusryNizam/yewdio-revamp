@@ -1,3 +1,5 @@
+import { useAppSelector } from "../app/hooks";
+import { selectSettings } from "../features/settings/settingSlice";
 import "./IconButton.css";
 import { LucideIcon } from "lucide-react";
 
@@ -21,6 +23,8 @@ const IconButton = ({
   disabled = false,
   className = "",
 }: IconButtonProps) => {
+  const { isLightTheme } = useAppSelector(selectSettings);
+
   return (
     <button
       className={`IconButton ${className}`}
@@ -28,7 +32,11 @@ const IconButton = ({
       style={{ backgroundColor }}
       disabled={disabled}
     >
-      <Icon size={size} fill={fill ?? "transparent"} color={color ?? "white"} />
+      <Icon
+        size={size}
+        fill={fill ?? "transparent"}
+        color={color ?? (isLightTheme ? "black" : "white")}
+      />
     </button>
   );
 };

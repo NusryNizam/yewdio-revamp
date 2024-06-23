@@ -12,11 +12,11 @@ import {
   setSheetData,
 } from "../features/settings/settingSlice";
 import { usePlayer } from "../hooks/usePlayer";
-import { XIcon } from "lucide-react";
+import { LoaderCircle, XIcon } from "lucide-react";
 
 const Search = () => {
   const [searchTermLocal, setSearchTermLocal] = useState("");
-  const { searchTerm } = useAppSelector(selectSettings);
+  const { searchTerm, isLightTheme } = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer();
 
@@ -45,7 +45,7 @@ const Search = () => {
         <div className="searchbox-container">
           <input
             type="text"
-            placeholder="Search for songs, artists or albums"
+            placeholder="Search for songs"
             className="searchbox"
             onChange={(e) => {
               setSearchTermLocal(e.target.value);
@@ -54,7 +54,15 @@ const Search = () => {
             disabled={isLoading}
             value={searchTermLocal}
           />
-          {searchTerm && searchTermLocal ? (
+
+          {isLoading ? (
+            <button
+              className="close-button clear-search loader"
+              disabled={true}
+            >
+              <LoaderCircle color={isLightTheme ? "black" : "white"} />
+            </button>
+          ) : searchTerm && searchTermLocal ? (
             <button
               className="close-button clear-search"
               onClick={() => {
@@ -62,7 +70,7 @@ const Search = () => {
                 setSearchTermLocal("");
               }}
             >
-              <XIcon />
+              <XIcon color={isLightTheme ? "black" : "white"} />
             </button>
           ) : null}
         </div>
@@ -83,6 +91,15 @@ const Search = () => {
               />
             ))}
           </div>
+        </div>
+      ) : null}
+
+      {isLoading ? (
+        <div className="loading-indicator">
+          <LoaderCircle
+            color={isLightTheme ? "black" : "white"}
+            className="loader"
+          />
         </div>
       ) : null}
 

@@ -9,6 +9,7 @@
 
 .sheet-button-text {
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .SheetButton:hover {

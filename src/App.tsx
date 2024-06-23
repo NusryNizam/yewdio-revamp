@@ -12,6 +12,7 @@ import {
   closeSheet,
   minimizePlayer,
   selectSettings,
+  setTheme,
 } from "./features/settings/settingSlice";
 import SheetButton from "./components/SheetButton";
 import { Heart, HeartCrack, PlayCircle, XIcon } from "lucide-react";
@@ -23,7 +24,7 @@ import {
 } from "./features/playlists/playlistSlice";
 import { Song } from "./services/searchBySong.types";
 import { Toaster } from "react-hot-toast";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { usePlayer } from "./hooks/usePlayer";
 import MainPlayer from "./views/MainPlayer";
 
@@ -33,6 +34,7 @@ function App() {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer();
+  const { isLightTheme } = useAppSelector(selectSettings);
 
   const handleCloseSheet = () => {
     dispatch(closeSheet());
@@ -63,6 +65,21 @@ function App() {
     handleCloseSheet();
   };
 
+  const updateTheme = useCallback(
+    (data: MediaQueryList): void => {
+      dispatch(setTheme(data.matches));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    const lightScheme = window.matchMedia("(prefers-color-scheme: light)");
+    lightScheme.addEventListener("change", () => updateTheme(lightScheme));
+
+    return () =>
+      lightScheme.removeEventListener("change", () => updateTheme(lightScheme));
+  }, [dispatch, updateTheme]);
+
   return (
     <div className="App">
       <Sidebar />
@@ -77,12 +94,12 @@ function App() {
         isOpen={isSheetOpen}
         onClose={handleCloseSheet}
         className="sheet-container"
-        snapPoints={[0.4]}
+        snapPoints={[0.36]}
       >
         <Sheet.Container className="">
           <Sheet.Header className="sheet sheet-header">
             <button className="close-button" onClick={handleCloseSheet}>
-              <XIcon />
+              <XIcon color={isLightTheme ? "black" : "white"} />
             </button>
           </Sheet.Header>
           <Sheet.Content className="sheet sheet-content">

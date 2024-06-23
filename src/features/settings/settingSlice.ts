@@ -7,12 +7,14 @@ interface settingState {
   isPlayerOpen: boolean;
   sheetData?: Song;
   searchTerm: string;
+  isLightTheme: boolean;
 }
 
 const initialState: settingState = {
   isSheetOpen: false,
   isPlayerOpen: false,
   searchTerm: "",
+  isLightTheme: false,
 };
 
 export const settingSlice = createSlice({
@@ -42,6 +44,10 @@ export const settingSlice = createSlice({
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+
+    setTheme: (state, action: PayloadAction<boolean>) => {
+      state.isLightTheme = action.payload;
+    },
   },
 });
 
@@ -53,6 +59,7 @@ export const {
   setSearchTerm,
   showPlayer,
   minimizePlayer,
+  setTheme,
 } = settingSlice.actions;
 
 export const selectSettings = (state: RootState) =>

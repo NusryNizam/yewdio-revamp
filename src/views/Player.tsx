@@ -5,7 +5,7 @@ import { selectNowPlaying } from "../features/playlists/playlistSlice";
 import SongCard from "../components/SongCard";
 import { LoaderCircle, Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import { showPlayer } from "../features/settings/settingSlice";
+import { selectSettings, showPlayer } from "../features/settings/settingSlice";
 import { usePlayer } from "../hooks/usePlayer";
 
 const Player = () => {
@@ -20,6 +20,7 @@ const Player = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
   const dispatch = useAppDispatch();
   const { playLoaded } = usePlayer();
+  const { isLightTheme } = useAppSelector(selectSettings);
 
   const [completedPercentage, setCompletedPercentage] = useState(0);
 
@@ -48,7 +49,9 @@ const Player = () => {
             style={{ width: `${completedPercentage}%` }}
           ></span>
 
-          <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
+          <div className="prevent-overflow">
+            <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
+          </div>
         </>
       ) : (
         <span className="text-light">Select a song to play</span>
@@ -59,11 +62,15 @@ const Player = () => {
         disabled={isLoading}
       >
         {isLoading ? (
-          <LoaderCircle size={24} color="white" className="loader" />
+          <LoaderCircle
+            size={24}
+            color={isLightTheme ? "black" : "white"}
+            className="loader"
+          />
         ) : playing ? (
-          <Pause size={24} color="white" />
+          <Pause size={24} color={isLightTheme ? "black" : "white"} />
         ) : (
-          <Play size={24} color="white" />
+          <Play size={24} color={isLightTheme ? "black" : "white"} />
         )}
       </button>
     </div>

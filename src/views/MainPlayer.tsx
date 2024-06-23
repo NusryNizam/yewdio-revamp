@@ -23,6 +23,7 @@ import { useGlobalAudioPlayer } from "react-use-audio-player";
 import { useEffect, useMemo, useState } from "react";
 import { Song } from "../services/searchBySong.types";
 import { usePlayer } from "../hooks/usePlayer";
+import { selectSettings } from "../features/settings/settingSlice";
 
 const MainPlayer = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
@@ -38,6 +39,7 @@ const MainPlayer = () => {
   const dispatch = useAppDispatch();
   const [completedPercentage, setCompletedPercentage] = useState(0);
   const { playLoaded } = usePlayer();
+  const { isLightTheme } = useAppSelector(selectSettings);
 
   const favourites = useAppSelector(selectFavourites);
 
@@ -109,20 +111,20 @@ const MainPlayer = () => {
             {isLoading ? (
               <IconButton
                 Icon={LoaderCircle}
-                backgroundColor="#2e2e2e"
+                backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 disabled={true}
                 className="loader"
               />
             ) : playing ? (
               <IconButton
                 Icon={PauseIcon}
-                backgroundColor="#2e2e2e"
+                backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 onPress={togglePlayPause}
               />
             ) : (
               <IconButton
                 Icon={PlayIcon}
-                backgroundColor="#2e2e2e"
+                backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 onPress={isReady ? togglePlayPause : playLoaded}
               />
             )}

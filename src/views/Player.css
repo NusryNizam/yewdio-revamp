@@ -20,6 +20,7 @@
   cursor: pointer;
   background-color: var(--secondary-background);
   border: 1px solid var(--border-light);
+  z-index: 1;
 }
 
 .seeker {
@@ -29,6 +30,25 @@
   left: 0;
   background-color: var(--accent);
   transition: all 1000ms ease-in-out;
+}
+
+.prevent-overflow {
+  max-width: 300px;
+  position: relative;
+}
+
+.prevent-overflow::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--secondary-background)
+  );
+  width: 20px;
+  left: calc(300px - 20px);
+  top: 0;
+  bottom: 0;
 }
 
 .loader {

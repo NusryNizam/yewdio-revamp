@@ -14,6 +14,7 @@ import "./Favourites.css";
 const Favourites = () => {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
+
   const { playAudio, playLoaded } = usePlayer({
     onend: () => {
       dispatch(playNext());
@@ -61,7 +62,7 @@ const Favourites = () => {
 
       {favourites.length > 0 ? (
         <button className="play-all" onClick={handlePlayFavourites}>
-          <ListVideoIcon size={20} />
+          <ListVideoIcon size={20} color={"black"} />
           Play All
         </button>
       ) : null}
