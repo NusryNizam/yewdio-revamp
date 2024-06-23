@@ -22,13 +22,22 @@ import IconButton from "../components/IconButton";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
 import { useEffect, useMemo, useState } from "react";
 import { Song } from "../services/searchBySong.types";
+import { usePlayer } from "../hooks/usePlayer";
 
 const MainPlayer = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
-  const { playing, togglePlayPause, seek, getPosition, isLoading, duration } =
-    useGlobalAudioPlayer();
+  const {
+    playing,
+    togglePlayPause,
+    seek,
+    getPosition,
+    isLoading,
+    duration,
+    isReady,
+  } = useGlobalAudioPlayer();
   const dispatch = useAppDispatch();
   const [completedPercentage, setCompletedPercentage] = useState(0);
+  const { playLoaded } = usePlayer();
 
   const favourites = useAppSelector(selectFavourites);
 
@@ -97,11 +106,10 @@ const MainPlayer = () => {
 
           <div className="player-controls">
             <IconButton Icon={SkipBackIcon} />
-            {isLoading ? (
+            {!isLoading ? (
               <IconButton
                 Icon={LoaderCircle}
                 backgroundColor="#2e2e2e"
-                onPress={togglePlayPause}
                 disabled={true}
                 className="loader"
               />
@@ -115,7 +123,7 @@ const MainPlayer = () => {
               <IconButton
                 Icon={PlayIcon}
                 backgroundColor="#2e2e2e"
-                onPress={togglePlayPause}
+                onPress={isReady ? togglePlayPause : playLoaded}
               />
             )}
             <IconButton Icon={SkipForwardIcon} />

@@ -6,12 +6,20 @@ import SongCard from "../components/SongCard";
 import { LoaderCircle, Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import { showPlayer } from "../features/settings/settingSlice";
+import { usePlayer } from "../hooks/usePlayer";
 
 const Player = () => {
-  const { togglePlayPause, playing, duration, getPosition, isLoading } =
-    useGlobalAudioPlayer();
+  const {
+    togglePlayPause,
+    playing,
+    duration,
+    getPosition,
+    isLoading,
+    isReady,
+  } = useGlobalAudioPlayer();
   const nowPlaying = useAppSelector(selectNowPlaying);
   const dispatch = useAppDispatch();
+  const { playLoaded } = usePlayer();
 
   const [completedPercentage, setCompletedPercentage] = useState(0);
 
@@ -34,18 +42,19 @@ const Player = () => {
   return (
     <div className="Player">
       {nowPlaying ? (
-        <span
-          className="seeker"
-          style={{ width: `${completedPercentage}%` }}
-        ></span>
-      ) : null}
-      {nowPlaying ? (
-        <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
+        <>
+          <span
+            className="seeker"
+            style={{ width: `${completedPercentage}%` }}
+          ></span>
+
+          <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
+        </>
       ) : (
         <span className="text-light">Select a song to play</span>
       )}
       <button
-        onClick={togglePlayPause}
+        onClick={isReady ? togglePlayPause : playLoaded}
         className="main-control-button"
         disabled={isLoading}
       >

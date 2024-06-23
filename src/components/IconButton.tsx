@@ -19,10 +19,11 @@ const IconButton = ({
   fill,
   color,
   disabled = false,
+  className = "",
 }: IconButtonProps) => {
   return (
     <button
-      className={`IconButton`}
+      className={`IconButton ${className}`}
       onClick={onPress}
       style={{ backgroundColor }}
       disabled={disabled}
