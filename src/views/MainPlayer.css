@@ -1,0 +1,31 @@
+.MainPlayer {
+  padding: 1rem;
+}
+
+.album-art-container {
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  pointer-events: none;
+}
+
+.player-details {
+  justify-content: center;
+  align-items: center;
+}
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 2rem;
+}
+
+.extra-controls {
+  padding-block: 1rem;
+}
+
+.main-play-button {
+  cursor: pointer;
+  background-color: var(--tertiary-background) !important;
+}

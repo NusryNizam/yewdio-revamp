@@ -4,12 +4,14 @@ import { RootState } from "../../app/store";
 
 interface settingState {
   isSheetOpen: boolean;
+  isPlayerOpen: boolean;
   sheetData?: Song;
   searchTerm: string;
 }
 
 const initialState: settingState = {
   isSheetOpen: false,
+  isPlayerOpen: false,
   searchTerm: "",
 };
 
@@ -29,6 +31,14 @@ export const settingSlice = createSlice({
     closeSheet: (state) => {
       state.isSheetOpen = false;
     },
+
+    showPlayer: (state) => {
+      state.isPlayerOpen = true;
+    },
+    minimizePlayer: (state) => {
+      state.isPlayerOpen = false;
+    },
+
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
@@ -41,6 +51,8 @@ export const {
   openSheet,
   closeSheet,
   setSearchTerm,
+  showPlayer,
+  minimizePlayer,
 } = settingSlice.actions;
 
 export const selectSettings = (state: RootState) => state.settings;

@@ -1,17 +1,23 @@
 import { useGlobalAudioPlayer } from "react-use-audio-player";
 import "./Player.css";
-import { useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectNowPlaying } from "../features/playlists/playlistSlice";
 import SongCard from "../components/SongCard";
 import { LoaderCircle, Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
+import { showPlayer } from "../features/settings/settingSlice";
 
 const Player = () => {
   const { togglePlayPause, playing, duration, getPosition, isLoading } =
     useGlobalAudioPlayer();
   const nowPlaying = useAppSelector(selectNowPlaying);
+  const dispatch = useAppDispatch();
 
   const [completedPercentage, setCompletedPercentage] = useState(0);
+
+  const handleOpenPlayer = () => {
+    dispatch(showPlayer());
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,7 +40,7 @@ const Player = () => {
         ></span>
       ) : null}
       {nowPlaying ? (
-        <SongCard data={nowPlaying} />
+        <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
       ) : (
         <span className="text-light">Select a song to play</span>
       )}

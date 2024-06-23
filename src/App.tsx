@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import {
   clearSheetData,
   closeSheet,
+  minimizePlayer,
   selectSettings,
 } from "./features/settings/settingSlice";
 import SheetButton from "./components/SheetButton";
@@ -24,9 +25,11 @@ import { Song } from "./services/searchBySong.types";
 import { Toaster } from "react-hot-toast";
 import { useMemo } from "react";
 import { usePlayer } from "./hooks/usePlayer";
+import MainPlayer from "./views/MainPlayer";
 
 function App() {
-  const { isSheetOpen, sheetData } = useAppSelector(selectSettings);
+  const { isSheetOpen, sheetData, isPlayerOpen } =
+    useAppSelector(selectSettings);
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer();
@@ -34,6 +37,10 @@ function App() {
   const handleCloseSheet = () => {
     dispatch(closeSheet());
     dispatch(clearSheetData());
+  };
+
+  const handleMinimizePlayer = () => {
+    dispatch(minimizePlayer());
   };
 
   const handlePlay = (songData: Song) => {
@@ -103,6 +110,21 @@ function App() {
                 )}
               </>
             ) : null}
+          </Sheet.Content>
+        </Sheet.Container>
+        <Sheet.Backdrop />
+      </Sheet>
+
+      <Sheet
+        isOpen={isPlayerOpen}
+        onClose={handleMinimizePlayer}
+        className="sheet-container"
+        snapPoints={[1]}
+      >
+        <Sheet.Container className="">
+          <Sheet.Header className="sheet sheet-header" />
+          <Sheet.Content className="sheet sheet-content">
+            <MainPlayer />
           </Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop />

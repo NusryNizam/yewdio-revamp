@@ -1,0 +1,20 @@
+.IconButton {
+  border: none;
+  background-color: transparent;
+  padding: 1.25rem;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* outline: 1px solid red; */
+}
+
+.IconButton:hover {
+  background-color: var(--tertiary-background);
+}
+
+.IconButton:active {
+  scale: 0.95;
+}
