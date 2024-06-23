@@ -106,7 +106,7 @@ const MainPlayer = () => {
 
           <div className="player-controls">
             <IconButton Icon={SkipBackIcon} />
-            {!isLoading ? (
+            {isLoading ? (
               <IconButton
                 Icon={LoaderCircle}
                 backgroundColor="#2e2e2e"
