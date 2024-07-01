@@ -8,6 +8,7 @@ type IconButtonProps = {
   onPress?: () => void;
   size?: number;
   className?: string;
+  buttonName?: string;
   backgroundColor?: string;
   fill?: string;
   color?: string;
@@ -22,6 +23,7 @@ const IconButton = ({
   color,
   disabled = false,
   className = "",
+  buttonName = "",
 }: IconButtonProps) => {
   const { isLightTheme } = useAppSelector(selectSettings);
 
@@ -31,6 +33,7 @@ const IconButton = ({
       onClick={onPress}
       style={{ backgroundColor }}
       disabled={disabled}
+      name={buttonName}
     >
       <Icon
         size={size}

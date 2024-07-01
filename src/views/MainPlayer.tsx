@@ -93,31 +93,39 @@ const MainPlayer = () => {
           </div>
 
           <div className="player-controls">
-            <IconButton Icon={SkipBackIcon} />
+            <IconButton Icon={SkipBackIcon} buttonName="play previous song" />
             {isLoading ? (
               <IconButton
                 Icon={LoaderCircle}
                 backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 disabled={true}
                 className="loader"
+                buttonName="song loading"
               />
             ) : playing ? (
               <IconButton
                 Icon={PauseIcon}
                 backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 onPress={pause}
+                buttonName="pause song"
               />
             ) : (
               <IconButton
                 Icon={PlayIcon}
                 backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
                 onPress={isReady ? play : playLoaded}
+                buttonName="play song"
               />
             )}
-            <IconButton Icon={SkipForwardIcon} />
+            <IconButton Icon={SkipForwardIcon} buttonName="play next song" />
           </div>
           <div className="player-controls extra-controls">
-            <IconButton Icon={UndoIcon} size={20} onPress={seekBackward} />
+            <IconButton
+              Icon={UndoIcon}
+              size={20}
+              onPress={seekBackward}
+              buttonName="seek backwards"
+            />
             {isFavourite ? (
               <IconButton
                 Icon={HeartIcon}
@@ -125,15 +133,22 @@ const MainPlayer = () => {
                 color="red"
                 size={20}
                 onPress={() => handleremoveFromFavourites(nowPlaying)}
+                buttonName="remove from favourites"
               />
             ) : (
               <IconButton
                 Icon={HeartIcon}
                 size={20}
                 onPress={() => handleAddToFavourites(nowPlaying)}
+                buttonName="add to favourites"
               />
             )}
-            <IconButton Icon={RedoIcon} size={20} onPress={seekForward} />
+            <IconButton
+              Icon={RedoIcon}
+              size={20}
+              onPress={seekForward}
+              buttonName="seek forwards"
+            />
           </div>
         </>
       ) : null}
