@@ -60,6 +60,7 @@ const Player = () => {
         onClick={isReady ? togglePlayPause : playLoaded}
         className="main-control-button"
         disabled={isLoading}
+        name="toggle play/pause"
       >
         {isLoading ? (
           <LoaderCircle
