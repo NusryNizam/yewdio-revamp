@@ -27,19 +27,13 @@ import { selectSettings } from "../features/settings/settingSlice";
 
 const MainPlayer = () => {
   const nowPlaying = useAppSelector(selectNowPlaying);
-  const {
-    playing,
-    togglePlayPause,
-    seek,
-    getPosition,
-    isLoading,
-    duration,
-    isReady,
-  } = useGlobalAudioPlayer();
+  const { playing, play, pause, getPosition, isLoading, duration, isReady } =
+    useGlobalAudioPlayer();
   const dispatch = useAppDispatch();
   const [completedPercentage, setCompletedPercentage] = useState(0);
   const { playLoaded } = usePlayer();
   const { isLightTheme } = useAppSelector(selectSettings);
+  const { seekBackward, seekForward } = usePlayer();
 
   const favourites = useAppSelector(selectFavourites);
 
@@ -54,14 +48,6 @@ const MainPlayer = () => {
 
   const handleremoveFromFavourites = (data: Song) => {
     dispatch(removeFromFavourites(data));
-  };
-
-  const seekForward = () => {
-    seek(getPosition() + 10);
-  };
-
-  const seekBackward = () => {
-    seek(getPosition() - 10);
   };
 
   useEffect(() => {
@@ -119,13 +105,13 @@ const MainPlayer = () => {
               <IconButton
                 Icon={PauseIcon}
                 backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
-                onPress={togglePlayPause}
+                onPress={pause}
               />
             ) : (
               <IconButton
                 Icon={PlayIcon}
                 backgroundColor={isLightTheme ? "#e8e8e8" : "#2e2e2e"}
-                onPress={isReady ? togglePlayPause : playLoaded}
+                onPress={isReady ? play : playLoaded}
               />
             )}
             <IconButton Icon={SkipForwardIcon} />
