@@ -6,7 +6,11 @@ import {
 } from "../features/playlists/playlistSlice";
 import { Song } from "../services/searchBySong.types";
 import { AUDIO_QUALITY, IMAGE_QUALITY } from "../services/search.types";
-import { getAudioUrl, getImageUrl } from "../utils/utils";
+import {
+  getAudioUrl,
+  getImageUrl,
+  replaceQuotePlaceholders,
+} from "../utils/utils";
 import { useCallback, useEffect } from "react";
 
 export const usePlayer = (config?: AudioLoadOptions) => {
@@ -66,9 +70,9 @@ export const usePlayer = (config?: AudioLoadOptions) => {
 
     if ("mediaSession" in navigator && nowPlaying) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: nowPlaying.name,
-        artist: artistNames,
-        album: albumName,
+        title: replaceQuotePlaceholders(nowPlaying.name),
+        artist: replaceQuotePlaceholders(artistNames),
+        album: replaceQuotePlaceholders(albumName),
         artwork: [
           {
             src: imageUrl,

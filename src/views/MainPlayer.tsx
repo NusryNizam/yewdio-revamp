@@ -16,7 +16,7 @@ import {
   selectNowPlaying,
 } from "../features/playlists/playlistSlice";
 import { IMAGE_QUALITY } from "../services/search.types";
-import { getImageUrl } from "../utils/utils";
+import { getImageUrl, replaceQuotePlaceholders } from "../utils/utils";
 import "./MainPlayer.css";
 import IconButton from "../components/IconButton";
 import { useGlobalAudioPlayer } from "react-use-audio-player";
@@ -86,9 +86,13 @@ const MainPlayer = () => {
           </div>
 
           <div className="details-container player-details">
-            <h4 className="song-title overflow-prevent">{nowPlaying?.name}</h4>
+            <h4 className="song-title overflow-prevent">
+              {replaceQuotePlaceholders(nowPlaying?.name ?? "")}
+            </h4>
             <p className="regular-text overflow-prevent">
-              {nowPlaying?.artists?.primary.map((artist) => `${artist?.name} `)}
+              {nowPlaying?.artists?.primary
+                .map((artist) => artist.name)
+                .join(", ")}
             </p>
           </div>
 

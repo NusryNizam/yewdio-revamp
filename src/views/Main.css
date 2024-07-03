@@ -12,6 +12,24 @@
   padding: 1.5rem;
 }
 
+.home-header {
+  background-color: transparent !important;
+}
+
+.home-header::after {
+  background-color: transparent !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.blurred-banner {
+  position: absolute !important;
+  inset: 0;
+  filter: blur(16px);
+}
+
 @media (max-width: 768px) {
   .Main > * {
     padding: 0;

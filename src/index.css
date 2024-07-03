@@ -14,6 +14,7 @@
   --border-light: #ffffff33;
   --accent: #ff8515;
   --text-light: #8c8c8c;
+  --text-lighter: rgb(184, 184, 184);
   --text-color: white;
   --text-color-inverted: black;
 
@@ -120,4 +121,10 @@ a {
   text-decoration: underline;
   padding-block: 0.5rem;
   display: block;
+  width: fit-content;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--text-color);
 }

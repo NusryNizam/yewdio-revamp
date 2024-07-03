@@ -4,6 +4,7 @@ import SongCard from "../components/SongCard";
 import { selectFavourites } from "../features/playlists/playlistSlice";
 import { usePlayer } from "../hooks/usePlayer";
 import "./Main.css";
+import NowPlaying from "../components/NowPlaying";
 
 export const Main = () => {
   const favourites = useAppSelector(selectFavourites);
@@ -11,9 +12,14 @@ export const Main = () => {
 
   return (
     <div className="Main">
-      <header className="search-header">
+      <header className="search-header home-header">
         <h2 className="title">Home</h2>
       </header>
+
+      <div className="relative">
+        <NowPlaying className="blurred-banner" />
+        <NowPlaying />
+      </div>
 
       <div>
         <p className="regular-medium-text bottom-gap">Favourites</p>

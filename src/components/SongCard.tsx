@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { IMAGE_QUALITY } from "../services/search.types";
-import { getImageUrl } from "../utils/utils";
+import { getImageUrl, replaceQuotePlaceholders } from "../utils/utils";
 import "./SongCard.css";
 import { Song } from "../services/searchBySong.types";
 import { MoreVertical } from "lucide-react";
@@ -46,9 +46,11 @@ const SongCard = ({
           />
         </div>
         <div className="details-container">
-          <h4 className="song-title overflow-prevent">{data.name}</h4>
+          <h4 className="song-title overflow-prevent">
+            {replaceQuotePlaceholders(data.name)}
+          </h4>
           <p className="regular-text overflow-prevent">
-            {data.artists?.primary.map((artist) => `${artist?.name} `)}
+            {data.artists?.primary.map((artist) => artist.name).join(", ")}
           </p>
         </div>
       </div>

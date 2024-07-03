@@ -8,3 +8,7 @@ export const getImageUrl = (quality: IMAGE_QUALITY, images: Image[]) => {
 export const getAudioUrl = (quality: AUDIO_QUALITY, urls: DownloadUrl[]) => {
   return urls.find((url) => quality === url.quality)?.url ?? "";
 };
+
+export const replaceQuotePlaceholders = (inputString: string) => {
+  return inputString.replace(/&quot;/g, '"');
+};
