@@ -58,3 +58,8 @@
     grid-template-rows: 1fr 4rem 4rem;
   }
 }
+
+.react-modal-sheet-backdrop {
+  pointer-events: painted !important;
+  backdrop-filter: blur(8px);
+}

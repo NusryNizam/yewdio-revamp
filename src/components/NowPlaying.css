@@ -8,6 +8,7 @@
   justify-content: flex-end;
   margin-bottom: 2rem;
   transition: all 250ms ease-in;
+  background-position: center;
 }
 
 .NowPlaying::after {

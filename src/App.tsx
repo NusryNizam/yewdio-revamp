@@ -15,7 +15,7 @@ import {
   setTheme,
 } from "./features/settings/settingSlice";
 import SheetButton from "./components/SheetButton";
-import { Heart, HeartCrack, PlayCircle, XIcon } from "lucide-react";
+import { Heart, HeartCrack, PlayCircle } from "lucide-react";
 import SongCard from "./components/SongCard";
 import {
   addToFavourites,
@@ -34,7 +34,6 @@ function App() {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer();
-  const { isLightTheme } = useAppSelector(selectSettings);
 
   const handleCloseSheet = () => {
     dispatch(closeSheet());
@@ -97,11 +96,10 @@ function App() {
         snapPoints={[0.36]}
       >
         <Sheet.Container className="">
-          <Sheet.Header className="sheet sheet-header">
-            <button className="close-button" onClick={handleCloseSheet}>
-              <XIcon color={isLightTheme ? "black" : "white"} />
-            </button>
-          </Sheet.Header>
+          <Sheet.Header
+            className="sheet sheet-header"
+            onTap={handleCloseSheet}
+          ></Sheet.Header>
           <Sheet.Content className="sheet sheet-content">
             {sheetData ? (
               <>
@@ -141,7 +139,10 @@ function App() {
         snapPoints={[1]}
       >
         <Sheet.Container className="">
-          <Sheet.Header className="sheet sheet-header" />
+          <Sheet.Header
+            className="sheet sheet-header"
+            onTap={handleMinimizePlayer}
+          />
           <Sheet.Content className="sheet sheet-content">
             <MainPlayer />
           </Sheet.Content>
