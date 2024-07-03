@@ -46,6 +46,7 @@
   overflow: hidden;
   text-wrap: nowrap;
   text-overflow: ellipsis;
+  max-width: calc(100% - 4rem);
 }
 
 .more-button {

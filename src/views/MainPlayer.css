@@ -50,3 +50,10 @@
   background-color: var(--accent);
   transition: all 1000ms ease-in-out;
 }
+
+.overflow-prevent-player {
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}

@@ -86,10 +86,10 @@ const MainPlayer = () => {
           </div>
 
           <div className="details-container player-details">
-            <h4 className="song-title overflow-prevent">
+            <h4 className="song-title overflow-prevent-player">
               {replaceQuotePlaceholders(nowPlaying?.name ?? "")}
             </h4>
-            <p className="regular-text overflow-prevent">
+            <p className="regular-text overflow-prevent-player">
               {nowPlaying?.artists?.primary
                 .map((artist) => artist.name)
                 .join(", ")}
