@@ -43,7 +43,7 @@ const Player = () => {
   return (
     <div className="Player">
       {nowPlaying ? (
-        <>
+        <div style={{ flex: 1 }}>
           <span
             className="seeker"
             style={{ width: `${completedPercentage}%` }}
@@ -52,7 +52,7 @@ const Player = () => {
           <div className="prevent-overflow">
             <SongCard data={nowPlaying} onPress={handleOpenPlayer} />
           </div>
-        </>
+        </div>
       ) : (
         <span className="text-light">Select a song to play</span>
       )}

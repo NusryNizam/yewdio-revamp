@@ -27,6 +27,7 @@ import { Toaster } from "react-hot-toast";
 import { useCallback, useEffect, useMemo } from "react";
 import { usePlayer } from "./hooks/usePlayer";
 import MainPlayer from "./views/MainPlayer";
+import { usePlaylist } from "./hooks/usePlaylist";
 
 function App() {
   const { isSheetOpen, sheetData, isPlayerOpen } =
@@ -34,6 +35,7 @@ function App() {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
   const { playAudio } = usePlayer();
+  usePlaylist();
 
   const handleCloseSheet = () => {
     dispatch(closeSheet());

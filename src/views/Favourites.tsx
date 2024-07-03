@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import SongCard from "../components/SongCard";
 import {
   playFavourites,
-  playNext,
   selectFavourites,
 } from "../features/playlists/playlistSlice";
 import { openSheet, setSheetData } from "../features/settings/settingSlice";
@@ -15,14 +14,7 @@ const Favourites = () => {
   const favourites = useAppSelector(selectFavourites);
   const dispatch = useAppDispatch();
 
-  const { playAudio, playLoaded } = usePlayer({
-    onend: () => {
-      dispatch(playNext());
-      setTimeout(() => {
-        playLoaded();
-      }, 500);
-    },
-  });
+  const { playAudio } = usePlayer();
 
   const handleMoreOptions = (data: Song) => {
     dispatch(openSheet());
@@ -31,9 +23,6 @@ const Favourites = () => {
 
   const handlePlayFavourites = () => {
     dispatch(playFavourites());
-    setTimeout(() => {
-      playLoaded();
-    }, 500);
   };
 
   return (

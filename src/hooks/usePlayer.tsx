@@ -1,6 +1,7 @@
 import { AudioLoadOptions, useGlobalAudioPlayer } from "react-use-audio-player";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
+  abortPlaylist,
   selectNowPlaying,
   setNowPlaying,
 } from "../features/playlists/playlistSlice";
@@ -27,6 +28,7 @@ export const usePlayer = (config?: AudioLoadOptions) => {
       ...config,
     });
     dispatch(setNowPlaying(songData));
+    dispatch(abortPlaylist());
   };
 
   const playLoaded = useCallback(() => {

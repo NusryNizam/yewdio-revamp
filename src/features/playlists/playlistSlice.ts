@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 interface playlistState {
   nowPlaying: Song | undefined;
   favourites: Song[];
+  currentPlaylist: Song[];
   playingIndex: number;
 }
 
@@ -14,6 +15,7 @@ const initialState: playlistState = {
   nowPlaying: undefined,
   favourites: [],
   playingIndex: -1,
+  currentPlaylist: [],
 };
 
 export const playlistSlice = createSlice({
@@ -50,31 +52,37 @@ export const playlistSlice = createSlice({
     },
 
     playNext: (state) => {
-      if (state.favourites.length > 0) {
+      if (state.currentPlaylist.length > 0) {
         state.playingIndex =
           state.playingIndex !== undefined
-            ? (state.playingIndex + 1) % state.favourites.length
+            ? (state.playingIndex + 1) % state.currentPlaylist.length
             : 0;
-        state.nowPlaying = state.favourites[state.playingIndex];
+        state.nowPlaying = state.currentPlaylist[state.playingIndex];
       }
     },
 
     playPrevious: (state) => {
-      if (state.favourites.length > 0) {
+      if (state.currentPlaylist.length > 0) {
         state.playingIndex =
           state.playingIndex !== undefined
-            ? (state.playingIndex - 1 + state.favourites.length) %
-              state.favourites.length
-            : state.favourites.length - 1;
-        state.nowPlaying = state.favourites[state.playingIndex];
+            ? (state.playingIndex - 1 + state.currentPlaylist.length) %
+              state.currentPlaylist.length
+            : state.currentPlaylist.length - 1;
+        state.nowPlaying = state.currentPlaylist[state.playingIndex];
       }
     },
 
     playFavourites: (state) => {
       if (state.favourites.length > 0) {
+        state.currentPlaylist = state.favourites;
         state.playingIndex = 0;
-        state.nowPlaying = state.favourites[0];
+        state.nowPlaying = state.currentPlaylist[0];
       }
+    },
+
+    abortPlaylist: (state) => {
+      state.playingIndex = -1;
+      state.currentPlaylist = [];
     },
   },
 });
@@ -88,6 +96,7 @@ export const {
   playNext,
   playPrevious,
   playFavourites,
+  abortPlaylist,
 } = playlistSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -98,5 +107,8 @@ export const selectNowPlaying = (state: RootState) =>
 
 export const selectFavourites = (state: RootState) =>
   state.persistedReducer.playlists.favourites;
+
+export const selectPlaylistSlice = (state: RootState) =>
+  state.persistedReducer.playlists;
 
 export default playlistSlice.reducer;
