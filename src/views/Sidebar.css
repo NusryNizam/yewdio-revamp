@@ -1,5 +1,4 @@
 .Sidebar {
-  /* border: 1px solid red; */
   background-color: var(--secondary-background);
   grid-row: 1/-1;
   border-top: none;
@@ -10,7 +9,6 @@
   display: flex;
   flex-direction: column;
   margin-block: auto;
-  /* border: 1px solid green; */
   height: 100%;
   justify-content: center;
   gap: 0.25rem;
@@ -45,6 +43,7 @@ a.active * {
   text-decoration: none !important;
   font-size: 1rem;
   color: var(--text-color);
+  font-weight: 500;
 }
 
 @media (max-width: 760px) {

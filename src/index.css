@@ -3,9 +3,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: dark;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -22,24 +19,6 @@
 
   background-color: var(--main-background);
   color: var(--text-white);
-}
-
-/* Light color scheme */
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --main-background: #ededed;
-    --secondary-background: #f1f1f1;
-    --tertiary-background: #fff;
-    --border-light: #30303033;
-    --accent: #ff8515;
-    --text-light: #888888;
-    --text-color: #000000;
-    --text-color-inverted: black;
-
-    background-color: var(--main-background);
-    color: var(--text-color);
-  }
 }
 
 /*
@@ -129,4 +108,16 @@ a {
 
 .text-light {
   color: var(--text-light);
+}
+
+.bottom-gap {
+  margin-bottom: 0.5rem;
+}
+
+.show-link {
+  color: var(--text-color);
+  font-weight: 500;
+  text-decoration: underline;
+  padding-block: 0.5rem;
+  display: block;
 }

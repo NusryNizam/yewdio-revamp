@@ -7,3 +7,13 @@
   max-height: 100%;
   grid-row: 1/2;
 }
+
+.Main > * {
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .Main > * {
+    padding: 0;
+  }
+}

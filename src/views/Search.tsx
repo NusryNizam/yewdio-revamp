@@ -78,7 +78,7 @@ const Search = () => {
 
       {data ? (
         <div className="search-container">
-          <p className="regular-medium-text">Songs</p>
+          <p className="regular-medium-text bottom-gap">Songs</p>
 
           <div className="songs-container">
             {data.data.results.map((song) => (

@@ -8,6 +8,25 @@
   padding-bottom: 4.5rem;
 }
 
+.play-all:hover {
+  filter: brightness(102%);
+}
+
+.play-all:active {
+  scale: 0.99;
+  filter: brightness(98%);
+}
+
+.Favourites > * {
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .Favourites > * {
+    padding: 0;
+  }
+}
+
 .play-all {
   display: flex;
   gap: 0.5rem;
@@ -23,13 +42,4 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-}
-
-.play-all:hover {
-  filter: brightness(102%);
-}
-
-.play-all:active {
-  scale: 0.99;
-  filter: brightness(98%);
 }

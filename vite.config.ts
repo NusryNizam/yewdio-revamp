@@ -12,7 +12,7 @@ export default defineConfig({
         name: "Yewdio",
         short_name: "Yewdio",
         description: "Listen to music on-the-go.",
-        theme_color: "#ff8515",
+        theme_color: "#101010",
         background_color: "#101010",
         categories: ["entertainment", "music"],
         display: "standalone",
