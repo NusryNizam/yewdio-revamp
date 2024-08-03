@@ -5,7 +5,17 @@
   max-height: 100%;
   grid-row: 1/2;
   position: relative;
-  padding-bottom: 4.5rem;
+}
+
+.fav-container {
+  min-height: 100%;
+}
+
+.play-all-container {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .play-all:hover {
@@ -39,7 +49,4 @@
   color: var(--text-color-inverted);
   padding: 0.5rem 1rem;
   cursor: pointer;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
 }

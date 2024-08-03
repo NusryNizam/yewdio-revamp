@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,700;1,700&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
@@ -44,7 +43,7 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: "Red Hat Text";
+  font-family: "Red Hat Text", sans-serif;
 }
 /*
   5. Improve media defaults
@@ -93,17 +92,17 @@ a {
 /* Common Styles */
 .title {
   font-size: 1.5rem;
-  font-family: "Red Hat Display";
+  font-family: "Red Hat Display", sans-serif;
 }
 
 .regular-text {
   font-size: 1rem;
-  font-family: "Red Hat Text";
+  font-family: "Red Hat Text", sans-serif;
 }
 
 .regular-medium-text {
   font-size: 1rem;
-  font-family: "Red Hat Text";
+  font-family: "Red Hat Text", sans-serif;
   font-weight: 600;
 }
 

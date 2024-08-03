@@ -49,12 +49,14 @@ const Favourites = () => {
         <div className="text-light">You don't have any favourites added.</div>
       )}
 
-      {favourites.length > 0 ? (
-        <button className="play-all" onClick={handlePlayFavourites}>
-          <ListVideoIcon size={20} color={"black"} />
-          Play All
-        </button>
-      ) : null}
+      <div className="play-all-container">
+        {favourites.length > 0 ? (
+          <button className="play-all" onClick={handlePlayFavourites}>
+            <ListVideoIcon size={20} color={"black"} />
+            Play All
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };
