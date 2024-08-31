@@ -2,6 +2,8 @@ import { AudioLoadOptions, useGlobalAudioPlayer } from "react-use-audio-player";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import {
   abortPlaylist,
+  playNext,
+  playPrevious,
   selectNowPlaying,
   setNowPlaying,
 } from "../features/playlists/playlistSlice";
@@ -51,6 +53,14 @@ export const usePlayer = (config?: AudioLoadOptions) => {
     seek(getPosition() - 10);
   }, [getPosition, seek]);
 
+  const playNextSong = useCallback(() => {
+    dispatch(playNext());
+  }, [dispatch]);
+
+  const playPreviousSong = useCallback(() => {
+    dispatch(playPrevious());
+  }, [dispatch]);
+
   useEffect(() => {
     if (isLoading) {
       navigator.mediaSession.playbackState = "none";
@@ -85,12 +95,33 @@ export const usePlayer = (config?: AudioLoadOptions) => {
       });
 
       navigator.mediaSession.setActionHandler("play", play);
+      navigator.mediaSession.setActionHandler("nexttrack", playNextSong);
+      navigator.mediaSession.setActionHandler(
+        "previoustrack",
+        playPreviousSong,
+      );
       navigator.mediaSession.setActionHandler("pause", pause);
       navigator.mediaSession.setActionHandler("seekbackward", seekBackward);
       navigator.mediaSession.setActionHandler("seekforward", seekForward);
       navigator.mediaSession.setActionHandler("stop", stop);
     }
-  }, [nowPlaying, pause, play, seekBackward, seekForward, stop]);
+  }, [
+    playNextSong,
+    playPreviousSong,
+    nowPlaying,
+    pause,
+    play,
+    seekBackward,
+    seekForward,
+    stop,
+  ]);
 
-  return { playAudio, playLoaded, seekForward, seekBackward };
+  return {
+    playAudio,
+    playLoaded,
+    seekForward,
+    seekBackward,
+    playNextSong,
+    playPreviousSong,
+  };
 };

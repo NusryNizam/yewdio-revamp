@@ -14,6 +14,7 @@ import {
   removeFromFavourites,
   selectFavourites,
   selectNowPlaying,
+  selectPlaylistSlice,
 } from "../features/playlists/playlistSlice";
 import { IMAGE_QUALITY } from "../services/search.types";
 import { getImageUrl, replaceQuotePlaceholders } from "../utils/utils";
@@ -33,7 +34,9 @@ const MainPlayer = () => {
   const [completedPercentage, setCompletedPercentage] = useState(0);
   const { playLoaded } = usePlayer();
   const { isLightTheme } = useAppSelector(selectSettings);
-  const { seekBackward, seekForward } = usePlayer();
+  const { currentPlaylist } = useAppSelector(selectPlaylistSlice);
+  const { seekBackward, seekForward, playNextSong, playPreviousSong } =
+    usePlayer();
 
   const favourites = useAppSelector(selectFavourites);
 
@@ -97,7 +100,12 @@ const MainPlayer = () => {
           </div>
 
           <div className="player-controls">
-            <IconButton Icon={SkipBackIcon} buttonName="play previous song" />
+            <IconButton
+              Icon={SkipBackIcon}
+              buttonName="play previous song"
+              onPress={playPreviousSong}
+              disabled={currentPlaylist.length === 0}
+            />
             {isLoading ? (
               <IconButton
                 Icon={LoaderCircle}
@@ -121,7 +129,12 @@ const MainPlayer = () => {
                 buttonName="play song"
               />
             )}
-            <IconButton Icon={SkipForwardIcon} buttonName="play next song" />
+            <IconButton
+              Icon={SkipForwardIcon}
+              buttonName="play next song"
+              onPress={playNextSong}
+              disabled={currentPlaylist.length === 0}
+            />
           </div>
           <div className="player-controls extra-controls">
             <IconButton
